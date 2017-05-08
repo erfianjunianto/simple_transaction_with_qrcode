@@ -12,7 +12,14 @@ class CreateTablePelanggan extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('pelanggan', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nama_pelanggan', 30);
+            $table->string('no_telepon_pelanggan', 15);
+            $table->text('alamat_pelanggan');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -22,6 +29,8 @@ class CreateTablePelanggan extends Migration
      */
     public function down()
     {
-        //
+        if (Schema::hasTable('pelanggan')) {
+            Schema::drop('pelanggan');
+        }
     }
 }

@@ -12,7 +12,13 @@ class CreateTableSales extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('sales', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nama_sales', 30);
+            $table->string('kode_sales', 10);
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -22,6 +28,8 @@ class CreateTableSales extends Migration
      */
     public function down()
     {
-        //
+        if (Schema::hasTable('sales')) {
+            Schema::drop('sales');
+        }
     }
 }

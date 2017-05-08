@@ -12,7 +12,12 @@ class CreateTableKasir extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('kasir', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('nama_kasir', 30);
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -22,6 +27,8 @@ class CreateTableKasir extends Migration
      */
     public function down()
     {
-        //
+        if (Schema::hasTable('kasir')) {
+            Schema::drop('kasir');
+        }
     }
 }

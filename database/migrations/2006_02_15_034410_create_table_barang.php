@@ -12,7 +12,15 @@ class CreateTableBarang extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('barang', function (Blueprint $table) {
+            $table->increments('id');
+            $table->string('kode_barang', 15);
+            $table->string('nama_barang', 30);
+            $table->string('satuan', 10);
+            $table->double('harga_satuan');
+            $table->timestamps();
+            $table->softDeletes();
+        });
     }
 
     /**
@@ -22,6 +30,8 @@ class CreateTableBarang extends Migration
      */
     public function down()
     {
-        //
+        if(Schema::hasTable('barang')){
+            Schema::drop('barang');
+        }
     }
 }
