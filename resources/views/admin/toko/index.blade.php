@@ -45,8 +45,10 @@
 						<td>{{ $toko->alamat_toko }}</td>
 						<td>{{ $toko->created_at }}</td>
 						<td>
-							<button type="button" class="btn btn-sm btn-primary"><i class="fa fa-pencil"></i> </button>
-							<button type="button" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button>
+							<a href="{{ url('/toko/'.$toko->id.'/edit') }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+							{!! Form::open(['route' => ['toko.destroy', $toko->id], 'method' => 'delete', 'style'=>'display:inline']) !!}
+							<button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i></button>
+							{!!  Form::close() !!}
 						</td>
 					</tr>
 				@endforeach

@@ -54,16 +54,46 @@ class TokosController extends Controller
 
 	public function edit($id)	
 	{
+		$toko = Toko::findOrFail($id);
 
+		if(isset($toko->id)) {	
+
+			return view('admin.toko.edit', ['toko' => $toko]);
+
+		} else {
+			return view('errors.404', [
+				'record_id' => $id,
+				'record_name' => ucfirst("toko"),
+			]);
+		}
 	}
 
 	public function update(Request $request, $id)
 	{
+		$validator = Toko::validate($request->all());
 
+		if ($validator->fails()) {
+			#return redirect()->route('toko/'.$id.'/edit')->withErrors($validator)->withInput();
+			return redirect()->back()->withErrors($validator)->withInput();;
+		}else{
+			
+				$toko = Toko::findOrFail($id);
+				$toko->nama_toko = ucwords($request->input('nama_toko'));
+				$toko->alamat_toko = $request->input('alamat_toko');
+				$toko->save();
+
+				Session::flash('message','Data Toko berhasil diubah');
+				return redirect()->route('toko.index');
+			
+		}
 	}
 
 	public function destroy($id)
 	{
 
+		Toko::find($id)->delete();
+
+		return redirect()->route('toko.index');
+		
 	}
 }

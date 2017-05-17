@@ -18,7 +18,7 @@ Route::get('/', function () {
 Route::auth();
 
 Route::get('/home', 'HomeController@index');
-
+Route::get('/admin', 'HomeController@index');
 Route::resource('/toko', 'TokosController');
 Route::resource('/sales', 'SalesController');
 Route::resource('/pelanggan', 'PelanggansController');
