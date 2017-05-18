@@ -8,5 +8,14 @@ use App\Http\Requests;
 
 class AdminController extends Controller
 {
-    //
+	public function __construct()
+    {
+        $this->middleware('admin');
+    }
+
+    public function index()
+	{	
+
+		return View('admin.home');
+	} 
 }

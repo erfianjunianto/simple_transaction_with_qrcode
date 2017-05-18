@@ -1,14 +1,14 @@
 @extends("admin.layouts.app")
 
-@section("contentheader_title", "Toko")
-@section("contentheader_description", "Toko listing")
-@section("section", "Toko")
+@section("contentheader_title", "Sales")
+@section("contentheader_description", "Sales listing")
+@section("section", "Sales")
 @section("sub_section", "Listing")
-@section("htmlheader_title", "Toko Listing")
+@section("htmlheader_title", "Sales Listing")
 
 @section("headerElems")
 
-	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Tambah Toko</button>
+	<button class="btn btn-success btn-sm pull-right" data-toggle="modal" data-target="#AddModal">Tambah Sales</button>
 
 @endsection
 
@@ -31,22 +31,22 @@
 			<thead>
 			<tr class="success">
 				<th>No</th>
-				<th>Nama Toko</th>
-				<th>Alamat Toko</th>
+				<th>Nama Sales</th>
+				<th>Kode Sales</th>
 				<th>Ditambahkan pada</th>
 				<th>Aksi</th>
 			</tr>
 			</thead>
 			<tbody>
-				@foreach ($tokos as $key => $toko)
+				@foreach ($sales as $key => $sales)
 					<tr>
 						<td>{{ $key + 1 }}</td>
-						<td>{{ $toko->nama_toko }}</td>
-						<td>{{ $toko->alamat_toko }}</td>
-						<td>{{ $toko->created_at }}</td>
+						<td>{{ $sales->nama_sales }}</td>
+						<td>{{ $sales->kode_sales }}</td>
+						<td>{{ $sales->created_at }}</td>
 						<td>
-							<a href="{{ url('/toko/'.$toko->id.'/edit') }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
-							{!! Form::open(['route' => ['toko.destroy', $toko->id], 'method' => 'delete', 'style'=>'display:inline']) !!}
+							<a href="{{ url('/sales/'.$sales->id.'/edit') }}" class="btn btn-sm btn-primary"><i class="fa fa-edit"></i></a>
+							{!! Form::open(['route' => ['toko.destroy', $sales->id], 'method' => 'delete', 'style'=>'display:inline']) !!}
 							<button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i></button>
 							{!!  Form::close() !!}
 						</td>
@@ -64,18 +64,18 @@
 		<div class="modal-content">
 			<div class="modal-header">
 				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-				<h4 class="modal-title" id="myModalLabel">Tambah Toko</h4>
+				<h4 class="modal-title" id="myModalLabel">Tambah Sales</h4>
 			</div>
-			{!! Form::open(['action' => 'TokosController@store', 'id' => 'toko-add-form']) !!}
+			{!! Form::open(['action' => 'SalesController@store', 'id' => 'sales-add-form']) !!}
 			<div class="modal-body">
 				<div class="box-body">
                     <div class="form-group">
-	                  <label for="inputNamaToko">Nama Toko</label>
-	                  <input type="text" name="nama_toko" class="form-control" id="inputNamaToko" placeholder="Masukkan Nama Toko">
+	                  <label for="inputNamaToko">Nama Sales</label>
+	                  <input type="text" name="nama_sales" value="{{ old('nama_sales') }}" class="form-control" id="inputNamaSales" placeholder="Masukkan Nama Sales">
 	                </div>
 	                <div class="form-group">
-	                  <label for="inputAlamatToko">Alamat Toko</label>
-	                  <textarea name="alamat_toko" class="form-control"></textarea>
+	                  <label for="inputAlamatToko">Kode Sales</label>
+	                  <input type="text" name="kode_sales" value="{{ old('kode_sales') }}" class="form-control" id="inputKodeSales" placeholder="Masukkan Kode Sales">
 	                </div>
 				</div>
 			</div>

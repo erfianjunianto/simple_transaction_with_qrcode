@@ -10,6 +10,11 @@ use Session;
 
 class TokosController extends Controller
 {
+	public function __construct()
+    {
+        $this->middleware('admin');
+    }
+    
 	public function index()
 	{	
 		$tokos = Toko::all();
@@ -41,7 +46,7 @@ class TokosController extends Controller
 				Session::flash('message','Toko berhasil ditambahkan');
 				return redirect()->route('toko.index');	
 			}else{
-				return redirect()->back()->withErrors("Gagal Input");	
+				return redirect()->back()->withErrors("Gagal Input Toko");	
 			}
 			
 		}

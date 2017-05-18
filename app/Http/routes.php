@@ -14,11 +14,35 @@
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::auth();
-
 Route::get('/home', 'HomeController@index');
-Route::get('/admin', 'HomeController@index');
+
+Route::group(['middleware' => 'web'], function() {
+    Route::auth();
+});
+
+#jika sudah login
+/*
+Route::group(['middleware' => ['web','auth']], function() {
+    
+	Route::get('/home', 'HomeController@index');
+	Route::get('/', function() {
+	    if(Auth::user()->admin == 1){
+	    	return view('admin.home');
+
+	    }else{
+	    	# jika login user
+	    	return view('home');
+	    }
+	});	
+	Route::resource('/toko', 'TokosController');
+	Route::resource('/sales', 'SalesController');
+	Route::resource('/pelanggan', 'PelanggansController');
+	Route::resource('/kasir', 'KasirsController');
+	Route::resource('/barang', 'BarangsController');
+	Route::resource('/user', 'UsersController');
+});
+*/
+Route::get('/admin', 'AdminController@index');
 Route::resource('/toko', 'TokosController');
 Route::resource('/sales', 'SalesController');
 Route::resource('/pelanggan', 'PelanggansController');
